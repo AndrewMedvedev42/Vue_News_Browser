@@ -35,19 +35,20 @@ a{
 }
 
   .image{
-    transition: .5s;
     width: 100%;
+    max-height: 500px;
   }
   .slot{
-
+    transition: .5s;
+    cursor: pointer;
     margin-bottom: 1rem;
     overflow: hidden;
     border-radius: 15px;
     box-shadow: rgba(0, 0, 0, .25) 2.5px 2.5px 5px;
     /* border: tomato 5px solid; */
   }
-  .slot:hover .image{
-    opacity: .7;
+  .slot:hover{
+    opacity: .5;
   }
   .news_details{
     margin: 1rem;

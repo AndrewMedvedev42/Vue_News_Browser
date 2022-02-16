@@ -4,8 +4,8 @@
         <input type="text" @input="checkExist($event)" class="input_field" placeholder="search news">
     </nav>
     <section class="news_list">
-        <a v-bind:href="article.url" class="slot" v-for="article in articles" :key="article.publishedAt" target="_blank">
-        <img class="image" v-bind:src="article.urlToImage" alt="image">
+        <a v-bind:href="article.url" class="slot main_slot" v-for="article in articles" :key="article.publishedAt" target="_blank">
+        <img v-if="article.image_url"  class="image" v-bind:src="article.image_url" alt="image">
         <article class="news_details">
             <h1 class="article_title article_big_title">{{article.title}}</h1>
             <p class="paragraph">{{article.description}}</p>
@@ -24,15 +24,15 @@ export default {
     }
   },
   mounted(){
-    fetch(`https://newsapi.org/v2/everything?q=everything&apiKey=${process.env.VUE_APP_NEWS_KEY}`)
+    fetch(`https://newsdata.io/api/1/news?apikey=${process.env.VUE_APP_NEWS_KEY}&q=apple`)
       .then(res => res.json())
-      .then(data=> this.articles = data.articles)
+      .then(data=> this.articles = data.results)
   },
   methods: {
        checkExist(event){
-        fetch(`https://newsapi.org/v2/everything?q=${event.target.value ? (event.target.value):"everything"}&apiKey=${process.env.VUE_APP_NEWS_KEY}`)
+        fetch(`https://newsdata.io/api/1/news?apikey=${process.env.VUE_APP_NEWS_KEY}&q=${event.target.value ? (event.target.value):"everything"}`)
         .then(res => res.json())
-        .then(data=> this.articles = data.articles)
+        .then(data=> this.articles = data.results)
        } 
     
 }
